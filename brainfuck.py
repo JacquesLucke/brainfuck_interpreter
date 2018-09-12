@@ -2,8 +2,6 @@ import sys
 from collections import defaultdict
 
 def run_brainfuck(code):
-    code = remove_white_space(code)
-
     cells = defaultdict(int)
     cell_pointer = 0
     instruction_pointer = 0
@@ -11,7 +9,9 @@ def run_brainfuck(code):
     while instruction_pointer < len(code):
         command = code[instruction_pointer]
 
-        if command == "+":
+        if command in " \n\t":
+            pass
+        elif command == "+":
             cells[cell_pointer] += 1
         elif command == "-":
             cells[cell_pointer] -= 1
@@ -44,12 +44,5 @@ def run_brainfuck(code):
             instruction_pointer = index - 1
 
         instruction_pointer += 1
-
-
-def remove_white_space(text):
-    text = text.replace(" ", "")
-    text = text.replace("\n", "")
-    text = text.replace("\t", "")
-    return text
 
 run_brainfuck(sys.argv[1])
