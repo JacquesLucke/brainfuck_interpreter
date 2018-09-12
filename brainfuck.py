@@ -42,6 +42,8 @@ def run_brainfuck(code):
                 if code[index] == "[": depth -= 1
                 index -= 1
             instruction_pointer = index - 1
+        else:
+            raise SyntaxError("unknown symbol: " + command)
 
         instruction_pointer += 1
 
